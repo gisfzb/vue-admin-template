@@ -32,6 +32,21 @@ import Layout from '@/layout'
  */
 export const constantRoutes = [
   {
+    path: '/map2d',
+    component: () => import('@/views/map2d/index'),
+    hidden: true
+  },
+  {
+    path: '/map2d-obt',
+    component: () => import('@/views/map2d-obt/index'),
+    hidden: true
+  },
+  {
+    path: '/jiahe-demo1',
+    component: () => import('@/views/jiahe/demo1'),
+    hidden: true
+  },
+  {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true

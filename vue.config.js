@@ -24,7 +24,7 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: '/',
+  publicPath: '/hainan-map2d',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
@@ -36,7 +36,25 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    before: require('./mock/mock-server.js')
+    before: require('./mock/mock-server.js'),
+    proxy: {
+      /* '/api': {
+         target: 'https://mock.ihx.me/mock/5baf3052f7da7e07e04a5116/antd-pro', //mock API接口系统
+         ws: false,
+         changeOrigin: true,
+         pathRewrite: {
+           '/jeecg-boot': ''  //默认所有请求都加了jeecg-boot前缀，需要去掉
+         }
+       },*/
+      '/sl-data': {
+          target: 'http://114.115.185.126:8011/sl-data', //请求本地 需要jeecg-boot后台项目
+          ws: false,
+          changeOrigin: true,
+          pathRewrite: {
+            '/sl-data': ''  //默认所有请求都加了jeecg-boot前缀，需要去掉
+          }
+      },
+  },
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
@@ -44,7 +62,9 @@ module.exports = {
     name: name,
     resolve: {
       alias: {
-        '@': resolve('src')
+        '@': resolve('src'),
+        '@comp': resolve('src/components'),
+        '@api': resolve('src/api')
       }
     }
   },
